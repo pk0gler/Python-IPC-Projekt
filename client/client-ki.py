@@ -35,6 +35,8 @@ class KI(object):
                     clientsocket.close()
                 else:
                     print("Verbunden ueber port " + str(self.port))
+                    self.map_matr =[[0 for x in range(self.size)] for y in range(self.size)]
+                    self.steps = 0
                     while True:
                         if self.rec_fields():
                             break
@@ -43,9 +45,12 @@ class KI(object):
 
     def rec_fields(self):
         data = self.clientsocket.recv(1024).decode()
+        fields = None
         if not data:
             print("Connection closed")
             return True
+        if self.steps != 0:
+            self.steps += 1
         if len(data) == 50:
             print(data[0:10])
             print(data[10:20])
@@ -53,9 +58,21 @@ class KI(object):
             print(data[30:40])
             print(data[40:50])
         elif len(data) == 18:
+            ''''
             print(data[0:6])
             print(data[6:12])
             print(data[12:18])
+            '''
+            data = str(data).replace(" ", "")
+            print(data)
+            fields = [[0 for x in range(3)] for y in range(3)]
+            for x in range(0,3):
+                temp = data[x * 3: (x * 3) + 3]
+                for y in range(0,3):
+                    fields[x][y] = temp[y]
+            for i in fields:
+                print(i)
+            self.add_to_map(fields)
         elif len(data) == 98:
             print(data[0:14])
             print(data[14:28])
@@ -69,6 +86,18 @@ class KI(object):
             print(data)
             return True
         return False
+
+    def add_to_map(self, fields):
+        field_size = len(fields)
+        if self.steps == 0:
+            for x in range(0,field_size):
+                for y in range(0,field_size):
+                    self.map_matr[x][y] = fields[x][y]
+        else:
+            print(self.steps)
+
+        for i in self.map_matr:
+            print(i)
 
 
 class CommandType(Enum):
