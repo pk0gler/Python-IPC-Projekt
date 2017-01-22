@@ -2,6 +2,8 @@ import socket
 from enum import Enum
 import sys
 
+import math
+
 
 class KI(object):
     def __init__(self, argv):
@@ -17,7 +19,7 @@ class KI(object):
         else:
             raise ValueError("Please specify port as in >>python client-k1.py -p 5050 -s 10<<")
         # Position matrix
-        self.pos_matr = [[0] * self.size] * self.size
+        self.pos_matr = [[0 for x in range(self.size)] for y in range(self.size)]
         # Initiate Connection
         self.connect()
 
@@ -27,7 +29,7 @@ class KI(object):
             try:
                 # Verbindung herstellen (Gegenpart: accept() )
                 clientsocket.connect(('localhost', self.port))
-                msg = input("Name?")
+                msg = "kogler"
                 # Nachricht schicken
                 clientsocket.send(msg.encode())
                 # Antwort empfangen
@@ -51,14 +53,21 @@ class KI(object):
         if not data:
             print("Connection closed")
             return True
-        if self.steps != 0:
-            self.steps += 1
+
         if len(data) == 50:
-            print(data[0:10])
-            print(data[10:20])
-            print(data[20:30])
-            print(data[30:40])
-            print(data[40:50])
+            data = self.is_bombe(data)
+            fields = [[0 for x in range(5)] for y in range(5)]
+            for x in range(0, 5):
+                temp = data[x * 5: (x * 5) + 5]
+                for y in range(0, 5):
+                    fields[x][y] = temp[y]
+
+            self.add_to_map(fields)
+            # print(data[0:10])
+            # print(data[10:20])
+            # print(data[20:30])
+            # print(data[30:40])
+            # print(data[40:50])
         elif len(data) == 18:
             '''
             print(data[0:6])
@@ -66,23 +75,24 @@ class KI(object):
             print(data[12:18])
             '''
             data = self.is_bombe(data)
-            print(data)
             fields = [[0 for x in range(3)] for y in range(3)]
             for x in range(0, 3):
                 temp = data[x * 3: (x * 3) + 3]
                 for y in range(0, 3):
                     fields[x][y] = temp[y]
-            for i in fields:
-                print(i)
+
             self.add_to_map(fields)
+
         elif len(data) == 98:
-            print(data[0:14])
-            print(data[14:28])
-            print(data[28:42])
-            print(data[42:56])
-            print(data[56:70])
-            print(data[70:84])
-            print(data[84:98])
+            data = self.is_bombe(data)
+            fields = [[0 for x in range(7)] for y in range(7)]
+            for x in range(0, 7):
+                temp = data[x * 7: (x * 7) + 7]
+                for y in range(0, 7):
+                    fields[x][y] = temp[y]
+
+            self.add_to_map(fields)
+
         else:
             # Lose / Win
             print(data)
@@ -97,38 +107,87 @@ class KI(object):
                     temp += "B "
                 else:
                     temp += i
-            return temp.split(" ", "")
+            return temp.split(" ")
         else:
-            return data.split(" " "")
+            return data.split(" ")
 
     def add_to_map(self, fields):
+        for i in fields:
+            print(i)
+        print("--")
         field_size = len(fields)
         if self.steps == 0:
-            self.pos_matr[0][0] = 1;
+            self.pos_matr[0][0] = 1
+            self.prev_x = 0
+            self.prev_y = 0
+
             for x in range(0, field_size):
                 for y in range(0, field_size):
                     self.map_matr[x - 1][y - 1] = fields[x][y]
+
         else:
-            print(self.steps)
+            if self.command == CommandType.UP.value.encode():
+                self.pos_matr[self.prev_y][self.prev_x] = 0
+                self.prev_y -= 1
+                self.prev_x = self.prev_x
+                self.pos_matr[self.prev_y][self.prev_x] = 1
+
+                for x in range(0, field_size):
+                    for y in range(0, field_size):
+                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
+
+            if self.command == CommandType.DOWN.value.encode():
+                self.pos_matr[self.prev_y][self.prev_x] = 0
+                self.prev_y += 1
+                self.prev_x = self.prev_x
+                self.pos_matr[self.prev_y][self.prev_x] = 1
+                print(self.prev_y)
+
+                for x in range(0, field_size):
+                    for y in range(0, field_size):
+                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
+
+            if self.command == CommandType.LEFT.value.encode():
+                self.pos_matr[self.prev_y][self.prev_x] = 0
+                self.prev_y = self.prev_y
+                self.prev_x -= 1
+                self.pos_matr[self.prev_y][self.prev_x] = 1
+
+                for x in range(0, field_size):
+                    for y in range(0, field_size):
+                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
+
+            if self.command == CommandType.RIGHT.value.encode():
+                self.pos_matr[self.prev_y][self.prev_x] = 0
+                self.prev_y = self.prev_y
+                self.prev_x += 1
+                self.pos_matr[self.prev_y][self.prev_x] = 1
+
+                for x in range(0, field_size):
+                    for y in range(0, field_size):
+                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
 
         for i in self.map_matr:
             print(i)
 
+        print("-")
+
         self.make_choice()
 
     def make_choice(self):
-        command = ""
-        if "B" in self.map_matr:
-            print("bombe")
-            command = CommandType.DOWN.value.encode()
-        else:
-            command = CommandType.UP.value.encode()
-
-        self.react(command)
+        command = input("wo?")
+        # if "B" in self.map_matr:
+        #     print("bombe")
+        #     command = CommandType.DOWN.value.encode()
+        # else:
+        #     command = CommandType.DOWN.value.encode()
+        self.react(command.encode())
 
     def react(self, command):
-        print(command)
+        #print(command)
         self.clientsocket.send(command)
+        self.steps += 1
+        self.command = command
 
 
 class CommandType(Enum):
