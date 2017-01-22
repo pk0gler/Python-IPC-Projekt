@@ -16,6 +16,8 @@ class KI(object):
                 raise ValueError("Please specify port as in >>python client-k1.py -p 5050 -s 10<<")
         else:
             raise ValueError("Please specify port as in >>python client-k1.py -p 5050 -s 10<<")
+        # Position matrix
+        self.pos_matr = [[0] * self.size] * self.size
         # Initiate Connection
         self.connect()
 
@@ -35,7 +37,7 @@ class KI(object):
                     clientsocket.close()
                 else:
                     print("Verbunden ueber port " + str(self.port))
-                    self.map_matr =[[0 for x in range(self.size)] for y in range(self.size)]
+                    self.map_matr = [[0 for x in range(self.size)] for y in range(self.size)]
                     self.steps = 0
                     while True:
                         if self.rec_fields():
@@ -58,17 +60,17 @@ class KI(object):
             print(data[30:40])
             print(data[40:50])
         elif len(data) == 18:
-            ''''
+            '''
             print(data[0:6])
             print(data[6:12])
             print(data[12:18])
             '''
-            data = str(data).replace(" ", "")
+            data = self.is_bombe(data)
             print(data)
             fields = [[0 for x in range(3)] for y in range(3)]
-            for x in range(0,3):
+            for x in range(0, 3):
                 temp = data[x * 3: (x * 3) + 3]
-                for y in range(0,3):
+                for y in range(0, 3):
                     fields[x][y] = temp[y]
             for i in fields:
                 print(i)
@@ -87,17 +89,46 @@ class KI(object):
             return True
         return False
 
+    def is_bombe(self, data):
+        if "B" in data:
+            temp = ""
+            for i in data:
+                if i == "B":
+                    temp += "B "
+                else:
+                    temp += i
+            return temp.split(" ", "")
+        else:
+            return data.split(" " "")
+
     def add_to_map(self, fields):
         field_size = len(fields)
         if self.steps == 0:
-            for x in range(0,field_size):
-                for y in range(0,field_size):
-                    self.map_matr[x][y] = fields[x][y]
+            self.pos_matr[0][0] = 1;
+            for x in range(0, field_size):
+                for y in range(0, field_size):
+                    self.map_matr[x - 1][y - 1] = fields[x][y]
         else:
             print(self.steps)
 
         for i in self.map_matr:
             print(i)
+
+        self.make_choice()
+
+    def make_choice(self):
+        command = ""
+        if "B" in self.map_matr:
+            print("bombe")
+            command = CommandType.DOWN.value.encode()
+        else:
+            command = CommandType.UP.value.encode()
+
+        self.react(command)
+
+    def react(self, command):
+        print(command)
+        self.clientsocket.send(command)
 
 
 class CommandType(Enum):
@@ -105,6 +136,14 @@ class CommandType(Enum):
     RIGHT = "right"
     DOWN = "down"
     LEFT = "left"
+
+
+class FieldType(Enum):
+    CENTER = {'short': 'C', 'sight': 3}
+    FOREST = {'short': 'F', 'sight': 3}
+    GRAS = {'short': 'G', 'sight': 5}
+    MOUNTAIN = {'short': 'M', 'sight': 7}
+    LAKE = {'short': 'L', 'sight': 0}
 
 
 if __name__ == '__main__':
