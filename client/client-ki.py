@@ -2,6 +2,8 @@ import socket
 from enum import Enum
 import sys
 
+from client.implementation import *
+
 import math
 
 
@@ -20,6 +22,8 @@ class KI(object):
             raise ValueError("Please specify port as in >>python client-k1.py -p 5050 -s 10<<")
         # Position matrix
         self.pos_matr = [[0 for x in range(self.size)] for y in range(self.size)]
+        self.graph = GridWithWeights(self.size, self.size);
+        self.types = FieldType(FieldType.CENTER)
         # Initiate Connection
         self.connect()
 
@@ -63,17 +67,7 @@ class KI(object):
                     fields[x][y] = temp[y]
 
             self.add_to_map(fields)
-            # print(data[0:10])
-            # print(data[10:20])
-            # print(data[20:30])
-            # print(data[30:40])
-            # print(data[40:50])
         elif len(data) == 18:
-            '''
-            print(data[0:6])
-            print(data[6:12])
-            print(data[12:18])
-            '''
             data = self.is_bombe(data)
             fields = [[0 for x in range(3)] for y in range(3)]
             for x in range(0, 3):
@@ -124,6 +118,7 @@ class KI(object):
             for x in range(0, field_size):
                 for y in range(0, field_size):
                     self.map_matr[x - 1][y - 1] = fields[x][y]
+                    self.graph.weights.update({((x-1) % self.size, (y-1) % self.size): self.types.get_weight(fields[x][y])})
 
         else:
             if self.command == CommandType.UP.value.encode():
@@ -132,20 +127,11 @@ class KI(object):
                 self.prev_x = self.prev_x
                 self.pos_matr[self.prev_y][self.prev_x] = 1
 
-                for x in range(0, field_size):
-                    for y in range(0, field_size):
-                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
-
             if self.command == CommandType.DOWN.value.encode():
                 self.pos_matr[self.prev_y][self.prev_x] = 0
                 self.prev_y += 1
                 self.prev_x = self.prev_x
                 self.pos_matr[self.prev_y][self.prev_x] = 1
-                print(self.prev_y)
-
-                for x in range(0, field_size):
-                    for y in range(0, field_size):
-                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
 
             if self.command == CommandType.LEFT.value.encode():
                 self.pos_matr[self.prev_y][self.prev_x] = 0
@@ -153,9 +139,6 @@ class KI(object):
                 self.prev_x -= 1
                 self.pos_matr[self.prev_y][self.prev_x] = 1
 
-                for x in range(0, field_size):
-                    for y in range(0, field_size):
-                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
 
             if self.command == CommandType.RIGHT.value.encode():
                 self.pos_matr[self.prev_y][self.prev_x] = 0
@@ -163,14 +146,27 @@ class KI(object):
                 self.prev_x += 1
                 self.pos_matr[self.prev_y][self.prev_x] = 1
 
-                for x in range(0, field_size):
-                    for y in range(0, field_size):
-                        self.map_matr[x - field_size//2 + self.prev_y][y - field_size//2 + self.prev_x] = fields[x][y]
+        for x in range(0, field_size):
+            for y in range(0, field_size):
+                self.map_matr[x - field_size // 2 + self.prev_y][y - field_size // 2 + self.prev_x] = fields[x][y]
+                self.graph.weights.update({((x - field_size // 2 + self.prev_y) % self.size, (y - field_size // 2 + self.prev_x) % self.size): self.types.get_weight(fields[x][y])})
 
         for i in self.map_matr:
             print(i)
 
         print("-")
+
+        print(self.graph.weights)
+
+        for i in range(self.size):
+            for j in range(self.size):
+                if self.map_matr[i][j] == "L":
+                    self.graph.walls.append((j,i))
+                    print(j,i,"asd")
+
+        print("-")
+
+        print(self.graph.walls)
 
         self.make_choice()
 
@@ -186,6 +182,18 @@ class KI(object):
     def react(self, command):
         #print(command)
         self.clientsocket.send(command)
+        a_star = input("a*?")
+        if a_star == "j":
+            x = int(input("wohin: x"))
+            y = int(input("wohin: y"))
+            came_from, cost_so_far = a_star_search(self.graph, (self.prev_x, self.prev_y), (x, y))
+
+            draw_grid(self.graph, width=3, point_to=came_from, start=(self.prev_x, self.prev_y), goal=(x, y))
+            print()
+            draw_grid(self.graph, width=3, number=cost_so_far, start=(self.prev_x, self.prev_y), goal=(x, y))
+            print()
+            draw_grid(self.graph, width=3, path=reconstruct_path(came_from, start=(0,0), goal=(3, 3)))
+
         self.steps += 1
         self.command = command
 
@@ -203,6 +211,18 @@ class FieldType(Enum):
     GRAS = {'short': 'G', 'sight': 5}
     MOUNTAIN = {'short': 'M', 'sight': 7}
     LAKE = {'short': 'L', 'sight': 0}
+
+    def get_weight(self, type):
+        if type == "C":
+            return 1
+        elif type == "F":
+            return 2
+        elif type == "G":
+            return 1
+        elif type == "M":
+            return 2
+        elif type == "L":
+            return 0
 
 
 if __name__ == '__main__':
