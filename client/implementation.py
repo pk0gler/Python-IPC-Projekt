@@ -4,6 +4,9 @@
 # Feel free to use this code in your own projects, including commercial projects
 # License: Apache v2.0 <http://www.apache.org/licenses/LICENSE-2.0.html>
 
+size_x = 10
+size_y = 10
+
 class SimpleGraph:
     def __init__(self):
         self.edges = {}
@@ -80,10 +83,13 @@ class SquareGrid:
     def neighbors(self, id):
         (x, y) = id
         results = [(x+1, y), (x, y-1), (x-1, y), (x, y+1)]
-        if (x + y) % 2 == 0: results.reverse() # aesthetics
-        results = filter(self.in_bounds, results)
-        results = filter(self.passable, results)
-        return results
+        results2 = []
+        for i in results:
+            results2.append((i[0]%size_x, i[1]%size_y))
+        #if (x + y) % 2 == 0: results.reverse() # aesthetics
+        #results = filter(self.in_bounds, results)
+        #results = filter(self.passable, results)
+        return results2
 
 class GridWithWeights(SquareGrid):
     def __init__(self, width, height):
@@ -152,10 +158,81 @@ def reconstruct_path(came_from, start, goal):
     path.reverse() # optional
     return path
 
-def heuristic(a, b):
-    (x1, y1) = a
-    (x2, y2) = b
-    return abs(x1 - x2) + abs(y1 - y2)
+def heuristic(goal, neigb):
+    (x1, y1) = goal
+    (x2, y2) = neigb
+
+    # Ueber die Grenze x und y wenn Feldanzahl gerade
+    x_abs = abs(x1 - x2)
+    y_abs = abs(y1 - y2)
+    if size_x % 2 == 0:
+        if neigb[0] < size_x//2 and goal[0] < size_x//2:
+            pass
+
+        elif neigb[0] < size_x//2 and not goal[0] < size_x//2:
+            x_temp = neigb[0] + (size_x-1-goal[0])+1
+            x_abs = min(x_abs, x_temp)
+
+        elif neigb[0] >= size_x//2 and goal[0] >= size_x//2:
+            pass
+
+        elif neigb[0] >= size_x//2 and not goal[0] >= size_x//2:
+            x_temp = goal[0] + (size_x - 1 - neigb[0]) + 1
+            x_abs = min(x_abs, x_temp)
+    else:
+        if neigb[0] < size_x // 2 and goal[0] < size_x // 2:
+            pass
+
+        elif neigb[0] < size_x // 2 and not goal[0] < size_x // 2:
+            x_temp = neigb[0] + (size_x - 1 - goal[0]) + 1
+            x_abs = min(x_abs, x_temp)
+
+
+        elif neigb[0] > size_x // 2 and goal[0] > size_x // 2:
+            pass
+
+        elif neigb[0] > size_x // 2 and not goal[0] > size_x // 2:
+            x_temp = goal[0] + (size_x - 1 - neigb[0]) + 1
+            x_abs = min(x_abs, x_temp)
+
+        else:
+            pass
+
+    if size_y % 2 == 0:
+        if neigb[1] < size_y//2 and goal[1] < size_y//2:
+            pass
+
+        elif neigb[1] < size_y//2 and not goal[1] < size_y//2:
+            y_temp = neigb[1] + (size_y-1-goal[1])+1
+            y_abs = min(y_abs, y_temp)
+
+        elif neigb[1] >= size_y//2 and goal[1] >= size_y//2:
+            pass
+
+        elif neigb[1] >= size_y//2 and not goal[1] >= size_y//2:
+            y_temp = goal[1] + (size_y - 1 - neigb[1]) + 1
+            y_abs = min(y_abs, y_temp)
+
+    else:
+        if neigb[1] < size_y//2 and goal[1] < size_y//2:
+            pass
+
+        elif neigb[1] < size_y//2 and not goal[1] < size_y//2:
+            y_temp = neigb[1] + (size_y-1-goal[1])+1
+            y_abs = min(y_abs, y_temp)
+
+        elif neigb[1] > size_y//2 and goal[1] > size_y//2:
+            pass
+
+        elif neigb[1] > size_y//2 and not goal[1] > size_y//2:
+            y_temp = goal[1] + (size_y - 1 - neigb[1]) + 1
+            y_abs = min(y_abs, y_temp)
+
+        else:
+            pass
+
+    return x_abs + y_abs
+
 
 def a_star_search(graph, start, goal):
     frontier = PriorityQueue()
@@ -167,10 +244,13 @@ def a_star_search(graph, start, goal):
     
     while not frontier.empty():
         current = frontier.get()
+        x = current[0] % size_x
+        y = current[1] % size_y
+        current = (x,y)
         
         if current == goal:
             break
-        
+
         for next in graph.neighbors(current):
             new_cost = cost_so_far[current] + graph.cost(current, next)
             if next not in cost_so_far or new_cost < cost_so_far[next]:
