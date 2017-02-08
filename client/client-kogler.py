@@ -1,9 +1,8 @@
+import heapq
 import socket
 import time
 
 import sys
-
-from client.implementation import *
 
 class Node(object):
     def __init__(self, x, y, val):
@@ -103,6 +102,197 @@ def reverse_command(prev_command):
     elif prev_command == "right":
         return "left"
 
+########################
+# Astar implementation #
+########################
+# utility functions for dealing with square grids
+
+
+def from_id_width(id, width):
+    return (id % width, id // width)
+
+
+def draw_tile(graph, id, style, width):
+    r = "."
+    if 'number' in style and id in style['number']: r = "%d" % style['number'][id]
+    if 'point_to' in style and style['point_to'].get(id, None) is not None:
+        (x1, y1) = id
+        (x2, y2) = style['point_to'][id]
+        if x2 == x1 + 1: r = "\u2192"
+        if x2 == x1 - 1: r = "\u2190"
+        if y2 == y1 + 1: r = "\u2193"
+        if y2 == y1 - 1: r = "\u2191"
+    if 'start' in style and id == style['start']: r = "A"
+    if 'goal' in style and id == style['goal']: r = "Z"
+    if 'path' in style and id in style['path']: r = "@"
+    if id in graph.walls: r = "#" * width
+    return r
+
+def draw_grid(graph, width=2, **style):
+    for y in range(graph.height):
+        for x in range(graph.width):
+            print("%%-%ds" % width % draw_tile(graph, (x, y), style, width), end="")
+        print()
+
+class SquareGrid:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.walls = []
+
+    def in_bounds(self, id):
+        (x, y) = id
+        return 0 <= x < self.width and 0 <= y < self.height
+
+    def passable(self, id):
+        return id not in self.walls
+
+    def neighbors(self, id):
+        (x, y) = id
+        results = [(x + 1, y), (x, y - 1), (x - 1, y), (x, y + 1)]
+        results2 = []
+        for i in results:
+            results2.append((i[0] % size_x, i[1] % size_y))
+        # if (x + y) % 2 == 0: results.reverse() # aesthetics
+        # results = filter(self.in_bounds, results)
+        # results = filter(self.passable, results)
+        return results2
+
+
+class GridWithWeights(SquareGrid):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+        self.weights = {}
+
+    def cost(self, from_node, to_node):
+        return self.weights.get(to_node, 1)
+
+class PriorityQueue:
+    def __init__(self):
+        self.elements = []
+
+    def empty(self):
+        return len(self.elements) == 0
+
+    def put(self, item, priority):
+        heapq.heappush(self.elements, (priority, item))
+
+    def get(self):
+        return heapq.heappop(self.elements)[1]
+
+def reconstruct_path(came_from, start, goal):
+    current = goal
+    path = [current]
+    while current != start:
+        current = came_from[current]
+        path.append(current)
+    path.append(start)  # optional
+    path.reverse()  # optional
+    return path
+
+
+def heuristic(goal, neigb):
+    (x1, y1) = goal
+    (x2, y2) = neigb
+
+    # Ueber die Grenze x und y wenn Feldanzahl gerade
+    x_abs = abs(x1 - x2)
+    y_abs = abs(y1 - y2)
+    if size_x % 2 == 0:
+        if neigb[0] < size_x // 2 and goal[0] < size_x // 2:
+            pass
+
+        elif neigb[0] < size_x // 2 and not goal[0] < size_x // 2:
+            x_temp = neigb[0] + (size_x - 1 - goal[0]) + 1
+            x_abs = min(x_abs, x_temp)
+
+        elif neigb[0] >= size_x // 2 and goal[0] >= size_x // 2:
+            pass
+
+        elif neigb[0] >= size_x // 2 and not goal[0] >= size_x // 2:
+            x_temp = goal[0] + (size_x - 1 - neigb[0]) + 1
+            x_abs = min(x_abs, x_temp)
+    else:
+        if neigb[0] < size_x // 2 and goal[0] < size_x // 2:
+            pass
+
+        elif neigb[0] < size_x // 2 and not goal[0] < size_x // 2:
+            x_temp = neigb[0] + (size_x - 1 - goal[0]) + 1
+            x_abs = min(x_abs, x_temp)
+
+
+        elif neigb[0] > size_x // 2 and goal[0] > size_x // 2:
+            pass
+
+        elif neigb[0] > size_x // 2 and not goal[0] > size_x // 2:
+            x_temp = goal[0] + (size_x - 1 - neigb[0]) + 1
+            x_abs = min(x_abs, x_temp)
+
+        else:
+            pass
+
+    if size_y % 2 == 0:
+        if neigb[1] < size_y // 2 and goal[1] < size_y // 2:
+            pass
+
+        elif neigb[1] < size_y // 2 and not goal[1] < size_y // 2:
+            y_temp = neigb[1] + (size_y - 1 - goal[1]) + 1
+            y_abs = min(y_abs, y_temp)
+
+        elif neigb[1] >= size_y // 2 and goal[1] >= size_y // 2:
+            pass
+
+        elif neigb[1] >= size_y // 2 and not goal[1] >= size_y // 2:
+            y_temp = goal[1] + (size_y - 1 - neigb[1]) + 1
+            y_abs = min(y_abs, y_temp)
+
+    else:
+        if neigb[1] < size_y // 2 and goal[1] < size_y // 2:
+            pass
+
+        elif neigb[1] < size_y // 2 and not goal[1] < size_y // 2:
+            y_temp = neigb[1] + (size_y - 1 - goal[1]) + 1
+            y_abs = min(y_abs, y_temp)
+
+        elif neigb[1] > size_y // 2 and goal[1] > size_y // 2:
+            pass
+
+        elif neigb[1] > size_y // 2 and not goal[1] > size_y // 2:
+            y_temp = goal[1] + (size_y - 1 - neigb[1]) + 1
+            y_abs = min(y_abs, y_temp)
+
+        else:
+            pass
+
+    return x_abs + y_abs
+
+
+def a_star_search(graph, start, goal):
+    frontier = PriorityQueue()
+    frontier.put(start, 0)
+    came_from = {}
+    cost_so_far = {}
+    came_from[start] = None
+    cost_so_far[start] = 0
+
+    while not frontier.empty():
+        current = frontier.get()
+        x = current[0] % size_x
+        y = current[1] % size_y
+        current = (x, y)
+
+        if current == goal:
+            break
+
+        for next in graph.neighbors(current):
+            new_cost = cost_so_far[current] + graph.cost(current, next)
+            if next not in cost_so_far or new_cost < cost_so_far[next]:
+                cost_so_far[next] = new_cost
+                priority = new_cost + heuristic(goal, next)
+                frontier.put(next, priority)
+                came_from[next] = current
+
+    return came_from, cost_so_far
 
 def main(argv):
     """ init-Method
@@ -316,8 +506,6 @@ def main(argv):
 
                     clientsocket.send(commands[0].encode())
                     prev_command = commands[0]
-                    #clientsocket.send(eing.encode())
-                    #prev_command = eing
                     time.sleep(timeout)
                     steps += 1
 

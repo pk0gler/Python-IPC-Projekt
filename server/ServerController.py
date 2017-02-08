@@ -144,6 +144,9 @@ class ServerController(QtGui.QWidget):
             self.bomblabel.deleteLater()
             self.player1label.deleteLater()
             self.player2label.deleteLater()
+            delattr(self, "bomblabel")
+            delattr(self, "player1label")
+            delattr(self, "player2label")
         for i in range(self.rows):
             for j in range(self.cols):
                 # Jeweiliges Widget ermitteln
