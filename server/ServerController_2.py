@@ -33,10 +33,6 @@ class ServerController(QtGui.QWidget):
     pCastle2 = QtGui.QPalette(QtCore.Qt.white)
     pCastle2.setColor(QtGui.QPalette.WindowText, QtCore.Qt.red)
 
-    temp = QtGui.QPalette(QtCore.Qt.blue)
-    print(temp.color(QtGui.QPalette.Base))
-    print(temp.color(QtGui.QPalette.Text))
-
     pGrass = QtGui.QPalette(QtCore.Qt.green)
     pForest = QtGui.QPalette(QtCore.Qt.darkGreen)
     pLake = QtGui.QPalette(QtCore.Qt.darkBlue)
@@ -85,7 +81,7 @@ class ServerController(QtGui.QWidget):
         available_fields = (self.rows * self.cols) - 5
         self.m_amount = self.myForm.horizontalSlider.value()
         self.myForm.horizontalSlider_2.setRange(10, available_fields - self.m_amount)
-        self.myForm.horizontalSlider_3.setRange(2, available_fields//5 - self.m_amount)
+        self.myForm.horizontalSlider_3.setRange(2, available_fields//4 - self.m_amount)
         self.myForm.lineEdit_3.setText(str(self.m_amount))
 
     def valueChangedF(self):
@@ -94,7 +90,7 @@ class ServerController(QtGui.QWidget):
         available_fields - self.myForm.horizontalSlider_3.value()
         self.f_amount = self.myForm.horizontalSlider_2.value()
         self.myForm.horizontalSlider.setRange(5, available_fields - self.f_amount)
-        self.myForm.horizontalSlider_3.setRange(2, available_fields//5 - self.f_amount)
+        self.myForm.horizontalSlider_3.setRange(2, available_fields//4 - self.f_amount)
         self.myForm.lineEdit_4.setText(str(self.f_amount))
 
     def valueChangedL(self):
@@ -105,10 +101,6 @@ class ServerController(QtGui.QWidget):
         self.myForm.horizontalSlider.setRange(5, available_fields - self.l_amount)
         self.myForm.horizontalSlider_2.setRange(10, available_fields - self.l_amount)
         self.myForm.lineEdit_5.setText(str(self.l_amount))
-
-    def doSomething(self, event):
-        print("haöö")
-        print(self.sender())
 
     def setup_game(self):
         """
@@ -143,7 +135,6 @@ class ServerController(QtGui.QWidget):
             for j in range(self.cols):
                 temp = QtGui.QLabel()
                 self.label_layout.addWidget(temp,i,j)
-                QtCore.QObject.connect(temp, QtCore.SIGNAL(("clicked()")), self.doSomething)
                 self.field[i].append(FieldType.GRASS)
 
         # Burg und Startposition von Spieler 1 setzen
@@ -215,11 +206,11 @@ class ServerController(QtGui.QWidget):
         Zeichnet die Felder in die entsprechenden Widgets.
         :return: None
         """
-        if hasattr(self,'bomblabel'):
+        #if hasattr(self,'bomblabel'):
             # Beschriftungen fuer Spieler bzw. Schriftrolle zuruecksetzen
-            delattr(self, "bomblabel")
-            delattr(self, "player1label")
-            delattr(self, "player2label")
+            #delattr(self, "bomblabel")
+            #delattr(self, "player1label")
+            #delattr(self, "player2label")
 
 
         for i in range(self.rows):
@@ -232,19 +223,35 @@ class ServerController(QtGui.QWidget):
                 #widget = getattr(self.myForm, "widget_"+str(widget_number))
                 widget.setAutoFillBackground(True)
 
+                widget.setStyleSheet("")
+
+                color = ""
+
                 # Hintergrundfarbe entsprechend setzen
                 if self.field[i][j] == FieldType.GRASS:
-                    widget.setPalette(self.pGrass)
+                    #widget.setPalette(self.pGrass)
+                    widget.setStyleSheet("background-color: LimeGreen")
+                    color = "LimeGreen"
                 elif self.field[i][j] == FieldType.FOREST:
-                    widget.setPalette(self.pForest)
+                    #widget.setPalette(self.pForest)
+                    widget.setStyleSheet("background-color: forestgreen")
+                    color = "forestgreen"
                 elif self.field[i][j] == FieldType.LAKE:
-                    widget.setPalette(self.pLake)
+                    #widget.setPalette(self.pLake)
+                    widget.setStyleSheet("background-color: navy")
+                    color = "navy"
                 elif self.field[i][j] == FieldType.MOUNTAIN:
-                    widget.setPalette(self.pMountain)
+                    #widget.setPalette(self.pMountain)
+                    widget.setStyleSheet("background-color: grey")
+                    color = "grey"
                 elif self.field[i][j] == FieldType.CASTLE1:
-                    widget.setPalette(self.pCastle1)
+                    #widget.setPalette(self.pCastle1)
+                    widget.setStyleSheet("background-color: black")
+                    color = "black"
                 elif self.field[i][j] == FieldType.CASTLE2:
-                    widget.setPalette(self.pCastle2)
+                    #widget.setPalette(self.pCastle2)
+                    widget.setStyleSheet("background-color: white")
+                    color = "white"
 
                 # Schriftrolle bzw. Spieler in Widget ggf. schreiben
                 temp_font = str(18)
@@ -253,32 +260,12 @@ class ServerController(QtGui.QWidget):
                     if temp_font <= 5:
                         temp_font = 9
 
-                if self.prev_widget_pl1 != None:
-                    self.prev_widget_pl1.setText("")
-
-                if self.prev_widget_pl2 != None:
-                    self.prev_widget_pl2.setText("")
-
                 if i == self.bomb[0] and j == self.bomb[1]:
-                    self.bomblabel = QtGui.QLabel(widget)
-                    widget.setText("<span style=\"font-size:%spt; font-weight:600; color:#cc0000;\">XX</span>"%temp_font)
-                    self.bomblabel.show()
+                    widget.setStyleSheet("QLabel {background-color: %s; border-image: url(scroll.png) 0 0 0 0 stretch stretch;}" % color)
                 if i == self.player1[0] and j == self.player1[1]:
-                    self.player1label = QtGui.QLabel(widget)
-                    self.prev_widget_pl1 = widget
-                    widget.setPalette(self.temp)
-                    if type(widget) == QtGui.QLabel:
-                        widget.setText("P2")
+                    widget.setStyleSheet("QLabel {background-color: %s; border-image: url(p1.png) 0 0 0 0 stretch stretch;}"%color)
                 if i == self.player2[0] and j == self.player2[1]:
-                    self.player2label = QtGui.QLabel(widget)
-                    self.prev_widget_pl2 = widget
-                    #self.player2label.setText("<span style=\"font-size:%spt; font-weight:600; color:#cccc00;\">P2</span>"%temp_font)
-                    widget.setPalette(self.temp)
-                    if type(widget) == QtGui.QLabel:
-                        widget.setText("<span style=\"font-size:%spt; font-weight:600; color:#cccc00;\">P2</span>"%temp_font)
-
-                #print(i,j,widget.text())
-
+                    widget.setStyleSheet("QLabel {background-color: %s; border-image: url(p2.png) 0 0 0 0 stretch stretch;}"%color)
 
     def generate_field_size(self):
         if self.myForm.checkBox.isChecked():

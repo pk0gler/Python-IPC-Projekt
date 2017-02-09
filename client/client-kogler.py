@@ -27,9 +27,11 @@ class Node(object):
 
     def calc_weight(self):
         if self.value == "M":
-            self.weight = 2
+            self.weight = 3
         elif self.value == "L":
             self.weight = 100
+        elif self.value == "F":
+            self.weight = 2
         else:
             self.weight = 1
 
@@ -303,7 +305,7 @@ def main(argv):
     """
     global ip, port, size_x, size_y
     global timeout
-    timeout = 2
+    timeout = 0.5
     if len(argv) == 0:
         raise ValueError("Please specify port as in >>python client-k1.py -p 5050 -s 10<<")
     # Set port globally
@@ -336,7 +338,7 @@ def main(argv):
                 have_bomb = False
                 while True:
                     data = clientsocket.recv(1024).decode()
-                    if "You" in data:
+                    if "You" in data or "Draw" in data:
                         print("Steps needed: ", steps)
                         sys.exit(0)
                     print("received data: " + data)
@@ -461,7 +463,7 @@ def main(argv):
 
                     if start == bomb_node:
                         print("im on bomb")
-                        print("Ich habe ", steps, " Schritte gebrauchbt")
+                        print("Ich habe ", steps, " Schritte gebraucht")
                         bomb_node = start
 
                         have_bomb = True
