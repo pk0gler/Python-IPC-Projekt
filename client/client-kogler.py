@@ -303,7 +303,7 @@ def main(argv):
     """
     global ip, port, size_x, size_y
     global timeout
-    timeout = 0.02
+    timeout = 2
     if len(argv) == 0:
         raise ValueError("Please specify port as in >>python client-k1.py -p 5050 -s 10<<")
     # Set port globally

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'C:\Users\pkogler\Documents\PyCharm\IPC-Projekt\server\server.ui'
 #
-# Created: Wed Feb  8 01:34:43 2017
+# Created: Wed Feb  8 15:05:36 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,12 +12,13 @@ from PySide import QtCore, QtGui
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(582, 526)
-        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Expanding)
+        Form.resize(400, 600)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(Form.sizePolicy().hasHeightForWidth())
         Form.setSizePolicy(sizePolicy)
+        Form.setMinimumSize(QtCore.QSize(400, 600))
         self.verticalLayout = QtGui.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget_101 = QtGui.QWidget(Form)
