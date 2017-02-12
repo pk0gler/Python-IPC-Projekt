@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generiert durch Microsoft Visio, SVG Export Zeichnung1.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.26772in" height="11.6929in"
+		viewBox="0 0 595.276 841.89" xml:space="preserve" color-interpolation-filters="sRGB" class="st16">
+	<v:documentProperties v:langID="2057" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#d7e3bf;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st2 {fill:#000000;font-family:Calibri;font-size:0.666664em}
+		.st3 {font-size:1em}
+		.st4 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st5 {fill:#000000;font-family:Calibri;font-size:1.00001em}
+		.st6 {fill:#d8d8d8;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st7 {fill:#fbd7bb;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st8 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st9 {fill:#ffffff;stroke:none;stroke-linecap:butt;stroke-width:7.2}
+		.st10 {fill:#ddd6e5}
+		.st11 {stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st12 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st13 {fill:#ffffff;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24;visibility:hidden}
+		.st14 {fill:#fbd7bb}
+		.st15 {fill:#7e649e;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st16 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<g v:mID="0" v:index="1" v:groupContext="foregroundPage">
+		<title>Zeichenblatt-1</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Verbinder" v:index="0"/>
+		<g id="shape5-1" v:mID="5" v:groupContext="shape" transform="translate(85.0394,-419.141)">
+			<title>Feld.5</title>
+			<desc>symKey = generateKey() pubKey = get() encryptLey = encrypt(sy...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="84.2084" cy="782.362" width="168.42" height="119.055"/>
+			<rect x="0" y="722.835" width="168.417" height="119.055" class="st1"/>
+			<text x="18.17" y="745.63" class="st2" v:langID="2057"><v:paragraph v:indentLeft="14.17" v:spBefore="2"/><v:tabList/><v:newlineChar/>symKey = generateKey()<v:newlineChar/><tspan
+						x="18.17" dy="1.45em" class="st3">pubKey = get()<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">encryptLey = encrypt(symKey/pubKey)<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">send(encryptKey)<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em" class="st3">----------------------------------------------------<v:newlineChar/></tspan><tspan
+						x="18.17" dy="1.45em" class="st3">encryptMsg = get()<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">msg = decrypt(encryptMsg / symKey)<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">output(msg)</tspan><v:newlineChar/></text>		</g>
+		<g id="shape6-11" v:mID="6" v:groupContext="shape" transform="translate(95.3808,-541.031)">
+			<title>Tabelle.6</title>
+			<desc>Client</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="73.867" cy="833.386" width="147.74" height="17.0079"/>
+			<rect x="0" y="824.882" width="147.734" height="17.0079" class="st4"/>
+			<text x="59.77" y="836.99" class="st5" v:langID="2057"><v:paragraph v:horizAlign="1"/><v:tabList/>Client</text>		</g>
+		<g id="shape3-14" v:mID="3" v:groupContext="shape" transform="translate(370.166,-419.141)">
+			<title>Feld.3</title>
+			<desc>msg = “Nachricht” pubKey = genPubKey() storeNS (pubKey) -----...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="84.2084" cy="782.362" width="168.42" height="119.055"/>
+			<rect x="0" y="722.835" width="168.417" height="119.055" class="st6"/>
+			<text x="18.17" y="745.63" class="st2" v:langID="2057"><v:paragraph v:indentLeft="14.17" v:spBefore="2"/><v:tabList/><v:newlineChar/>msg = “Nachricht”<v:newlineChar/><tspan
+						x="18.17" dy="1.45em" class="st3">pubKey = genPubKey()<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">storeNS (pubKey)<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em" class="st3">--------------------------------------------------------<v:newlineChar/></tspan><tspan
+						x="18.17" dy="1.45em" class="st3">encrypKey = get()<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">symKey = decrypt(encryptKey / privKey)<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">encryptMsg = encrypt(msg/symKey)<v:newlineChar/></tspan><tspan x="18.17" dy="1.45em"
+						class="st3">send (encrypMsg)</tspan><v:newlineChar/></text>		</g>
+		<g id="shape4-24" v:mID="4" v:groupContext="shape" transform="translate(374.932,-541.031)">
+			<title>Tabelle.4</title>
+			<desc>Service</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="79.4419" cy="831.067" width="158.89" height="21.6464"/>
+			<rect x="0" y="820.243" width="158.884" height="21.6464" class="st4"/>
+			<text x="62" y="834.67" class="st5" v:langID="2057"><v:paragraph v:horizAlign="1"/><v:tabList/>Service</text>		</g>
+		<g id="shape1-27" v:mID="1" v:groupContext="shape" transform="translate(228.341,-583.937)">
+			<title>Feld</title>
+			<desc>COMMON NAME group.service1,dc=nodomain,dc=com description Pub...</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
+			<v:textRect cx="84.2084" cy="796.793" width="168.42" height="90.1932"/>
+			<rect x="0" y="751.697" width="168.417" height="90.1932" class="st7"/>
+			<text x="56.18" y="774.5" class="st2" v:langID="2057"><v:paragraph v:spBefore="2" v:horizAlign="1"/><v:tabList/><v:newlineChar/>COMMON NAME<v:newlineChar/><tspan
+						x="23.11" dy="1.45em" class="st3">group.service1,dc=nodomain,dc=com<v:newlineChar/><v:newlineChar/></tspan><tspan
+						x="65.98" dy="2.9em" class="st3">description<v:newlineChar/></tspan><tspan x="67.63" dy="1.45em"
+						class="st3">Public Key</tspan></text>		</g>
+		<g id="shape2-33" v:mID="2" v:groupContext="shape" transform="translate(233.108,-675.676)">
+			<title>Tabelle.2</title>
+			<desc>Naming Service</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="79.4419" cy="831.067" width="158.89" height="21.6464"/>
+			<rect x="0" y="820.243" width="158.884" height="21.6464" class="st4"/>
+			<text x="41.75" y="834.67" class="st5" v:langID="2057"><v:paragraph v:horizAlign="1"/><v:tabList/>Naming Service</text>		</g>
+		<g id="shape25-36" v:mID="25" v:groupContext="shape" v:layerMember="0" transform="translate(184.252,-566.929)">
+			<title>Dynamischer Verbinder</title>
+			<desc>Get PK</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="0" cy="782.491" width="40" height="17.6036"/>
+			<path d="M0 841.89 L0 779.79 L56.69 779.79" class="st8"/>
+			<rect v:rectContext="textBkgnd" x="-10.9022" y="777.691" width="21.8043" height="9.59985" class="st9"/>
+			<text x="-10.9" y="784.89" class="st2" v:langID="2057"><v:paragraph v:horizAlign="1"/><v:tabList/>Get PK</text>		</g>
+		<g id="shape26-41" v:mID="26" v:groupContext="shape" v:layerMember="0" transform="translate(457.795,-566.929)">
+			<title>Dynamischer Verbinder.26</title>
+			<desc>Store PK</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="0" cy="783.2" width="40" height="17.6036"/>
+			<path d="M0 841.89 L0 779.79 L-55.28 779.79" class="st8"/>
+			<rect v:rectContext="textBkgnd" x="-13.7205" y="778.4" width="27.4411" height="9.59985" class="st9"/>
+			<text x="-13.72" y="785.6" class="st2" v:langID="2057"><v:paragraph v:horizAlign="1"/><v:tabList/>Store PK</text>		</g>
+		<g id="group28-46" transform="translate(361.417,1226.55) rotate(180)" v:mID="28" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<title>1D-Pfeil</title>
+			<g id="shape29-47" v:mID="29" v:groupContext="shape">
+				<title>Tabelle.29</title>
+				<path d="M0 836.5 L79.65 836.5 L79.65 841.89 L85.04 831.12 L79.65 820.35 L79.65 825.73 L0 825.73 L0 836.5 Z"
+						class="st10"/>
+				<path d="M0 836.5 L79.65 836.5 L79.65 841.89 L85.04 831.12 L79.65 820.35 L79.65 825.73 L0 825.73" class="st11"/>
+			</g>
+			<g id="shape30-50" v:mID="30" v:groupContext="shape">
+				<title>Tabelle.30</title>
+				<path d="M0 836.5 L79.65 836.5 L79.65 841.89 L85.04 831.12 L79.65 820.35 L79.65 825.73 L0 825.73 L0 836.5"
+						class="st12"/>
+			</g>
+			<g id="shape31-53" v:mID="31" v:groupContext="shape" transform="translate(-1.09039,-5.47703)">
+				<title>Tabelle.31</title>
+				<rect x="0" y="831.301" width="0.48" height="10.5893" class="st13"/>
+			</g>
+		</g>
+		<g id="group32-55" transform="translate(276.378,-499.465)" v:mID="32" v:groupContext="group">
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<title>1D-Pfeil.32</title>
+			<g id="shape33-56" v:mID="33" v:groupContext="shape">
+				<title>Tabelle.33</title>
+				<path d="M0 836.5 L79.65 836.5 L79.65 841.89 L85.04 831.12 L79.65 820.35 L79.65 825.73 L0 825.73 L0 836.5 Z"
+						class="st14"/>
+				<path d="M0 836.5 L79.65 836.5 L79.65 841.89 L85.04 831.12 L79.65 820.35 L79.65 825.73 L0 825.73" class="st11"/>
+			</g>
+			<g id="shape34-59" v:mID="34" v:groupContext="shape">
+				<title>Tabelle.34</title>
+				<path d="M0 836.5 L79.65 836.5 L79.65 841.89 L85.04 831.12 L79.65 820.35 L79.65 825.73 L0 825.73 L0 836.5"
+						class="st12"/>
+			</g>
+			<g id="shape35-62" v:mID="35" v:groupContext="shape" transform="translate(-1.09039,-5.47703)">
+				<title>Tabelle.35</title>
+				<rect x="0" y="831.301" width="0.48" height="10.5893" class="st13"/>
+			</g>
+		</g>
+		<g id="shape36-64" v:mID="36" v:groupContext="shape" transform="translate(289.189,-463.062)">
+			<title>Feld.36</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<rect x="0" y="810.676" width="46.7209" height="31.2134" class="st15"/>
+		</g>
+	</g>
+</svg>

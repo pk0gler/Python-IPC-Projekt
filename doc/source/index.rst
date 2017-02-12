@@ -21,6 +21,7 @@ Contents:
    :maxdepth: 2
 
    ki
+   server
 
 
 Indices and tables

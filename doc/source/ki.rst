@@ -1,6 +1,6 @@
 KI Module
 -----------------
 
-.. automodule:: client.client
+.. automodule:: client.client_kogler
     :members:
     :special-members:

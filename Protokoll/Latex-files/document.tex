@@ -1,0 +1,79 @@
+\documentclass[letterpaper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINITIONS
+% Change those informations
+% If you need umlauts you have to escape them, e.g. for an ü you have to write \"u
+\gdef\mytitle{Protokoll IPC-Projekt}
+\gdef\mythema{IPC Game / Pathfinding}
+
+\gdef\mysubject{Softwareentwicklung}
+\gdef\mycourse{5BHITT 2016/17}
+\gdef\myauthor{Philipp Kogler}
+
+\gdef\myversion{0.2}
+\gdef\mybegin{Begonnen am \today}
+\gdef\myfinish{Beendet am \today}
+
+\gdef\mygrade{Note:}
+\gdef\myteacher{Betreuer: Prof. Rafeiner, Prof. Dolezal}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\input special/preamble.tex
+
+\let\tempsection\section
+\renewcommand\section[1]{\vspace{-0.3cm}\tempsection{#1}\vspace{-0.3cm}}
+\WithSuffix\newcommand\section*[1]{\tempsection*{#1}}
+
+\newcommand{\itab}[1]{\hspace{2cm}\rlap{#1}}
+
+\let\tempsubsection\subsection
+\renewcommand\subsection[1]{\vspace{0cm}\tempsubsection{#1}\vspace{0cm}}
+
+\let\tempsubsubsection\subsubsection
+\renewcommand\subsubsection[1]{\vspace{0cm}\tempsubsubsection{#1}\vspace{0cm}}
+
+
+\linespread{1.2}
+
+\lhead{\mysubject}
+\chead{}
+\rhead{\bfseries\mythema}
+\lfoot{\mycourse}
+\cfoot{\thepage\ of \pageref{LastPage}}
+% Creative Commons license BY
+% http://creativecommons.org/licenses/?lang=de
+\rfoot{\ccby\hspace{2mm}\myauthor}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\begin{document}
+\parindent 0pt
+\parskip 6pt
+
+\pagenumbering{Roman}
+\input{special/title}
+
+\clearpage
+\thispagestyle{empty}
+\linespread{1.1}
+\tableofcontents
+\linespread{1.2}
+
+\newpage
+\pagenumbering{arabic}
+\pagestyle{fancy}
+
+%\vspace{-0.5cm}
+
+\input sections/task.tex
+\input sections/solution.tex
+\clearpage
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\lstlistoflistings
+\listoffigures
+
+\end{document}

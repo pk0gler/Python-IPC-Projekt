@@ -1,0 +1,34 @@
+%!TEX root=../document.tex
+
+\section{Einführung}
+Diese Übung zeigt die Anwendung bzw. die Umsetzung eines Loadbalancers in Java.
+Es sollen somit 2 verschiedene Loadbalancingverfahren umgesetzt werden.
+
+\subsection{Ziele}
+Das Ziel dieser Übung ist einen funktionierenden Loadbalancer in Java umzusetzten.
+
+Dieser soll 2 verschiedene Loadbalancing Methoden implementieren.
+
+Die Kommunikation zwischen Client und Server wird mithilfe von RMI umgesetzt.
+Es soll möglich sein eine gewisse Anzahl von Clients und entsprechenden Server zu simulieren.
+\subsection{Voraussetzungen}
+\begin{itemize}
+	\item Grundlagen Java
+	\item Grundlagen in Loadbalancing
+	\item Grundlagen mit Remote Method Invocation (RMI)
+\end{itemize}
+
+\subsection{Aufgabenstellung}
+Es soll ein Load Balancer mit mindestens 2 unterschiedlichen Load-Balancing Methoden (jeweils 7 Punkte) implementiert werden (ähnlich dem PI Beispiel [1]; Lösung zum Teil veraltet [2]). Eine Kombination von mehreren Methoden ist möglich. Die Berechnung/Service und die Kommunikationstechnologie (Java RMI, CORBA, HTTP, Sockets, ...) sind frei wählbar!
+
+Folgende Load Balancing Methoden stehen zur Auswahl:
+
+\begin{itemize}
+	\item Round Robin
+	\item Weighted Round Robin
+	\item Least Connection
+	\item Agent Based / Server Probes
+\end{itemize}
+
+Um die Komplexität zu steigern, soll zusätzlich eine "Session Persistence" (2 Punkte) implementiert werden.
+\clearpage
