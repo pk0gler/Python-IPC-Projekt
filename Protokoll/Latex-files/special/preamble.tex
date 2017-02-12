@@ -64,7 +64,6 @@
 	numberstyle=\tiny,
 	captionpos=b,
 	xleftmargin=0.5cm,
-	xrightmargin=0.5cm,
 	showspaces=false,
 	showstringspaces=false,
 	basewidth={0.53em,0.45em},
@@ -79,8 +78,25 @@
 	stringstyle=\color{javared},
 	commentstyle=\color{javagreen},
 	morecomment=[s][\color{javadocblue}]{/**}{*/},
-	framesep=10pt,
-	numbers=none
+}
+
+\lstdefinestyle{python}{
+	language=Python,
+	aboveskip={1\baselineskip},
+	keywordstyle=\color{javadocblue}\bfseries,
+	stringstyle=\color{javared},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+}
+
+\lstdefinestyle{python2}{
+	language=Python,
+	aboveskip={1\baselineskip},
+	keywordstyle=\color{javadocblue}\bfseries,
+	stringstyle=\color{javared},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+	numbers = none
 }
 
 \lstdefinestyle{XML}{
@@ -125,12 +141,7 @@
 
 \lstdefinestyle{BashInputStyle}{
 	language=bash,
-	aboveskip={0.6\baselineskip},
-	numbers=none,
-	comment=[l]{//},
-	morecomment=[s]{/*}{*/},
-	commentstyle=\color{javagreen}\ttfamily,
-	stringstyle=\color{red}\ttfamily,
+	aboveskip={1\baselineskip}
 }
 
 % http://tex.stackexchange.com/questions/83085/how-to-improve-listings-display-of-json-files
@@ -168,10 +179,10 @@
 
 
 \usepackage[
-	colorlinks,
-	citecolor=black,
-	filecolor=black,
-	linkcolor=black,
-	urlcolor=black,
-	linktoc=all
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black,
+linktoc=all
 ]{hyperref}

@@ -27,45 +27,25 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Ziele}{1}{subsection.1.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Voraussetzungen}{1}{subsection.1.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Aufgabenstellung}{1}{subsection.1.3}}
-\citation{wiki}
-\citation{wiki}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Loadbalancing - Allgemein}{2}{section.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Loadbalancing schema}}{2}{figure.caption.3}}
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:load}{{1}{2}{Loadbalancing schema}{figure.caption.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Ergebnisse}{3}{section.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Kommunikation mittels RMI}{3}{subsection.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Aufbau von RMI}{3}{subsubsection.3.1.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces RMI Aufbau\relax }}{3}{figure.caption.4}}
-\newlabel{fig:rmi}{{2}{3}{RMI Aufbau\relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Klassenaufteilung / Architektur}{4}{subsubsection.3.1.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \relax }}{4}{figure.caption.5}}
-\newlabel{fig:diagram}{{3}{4}{\relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}CLI Parsing - Usage}{5}{subsection.3.2}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Usage}{5}{lstlisting.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Compute Package}{6}{subsubsection.3.2.1}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}generic Task Interface}{6}{lstlisting.2}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Compute Interface}{6}{lstlisting.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Loadbalancer generell}{7}{subsubsection.3.2.2}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}Loadbalancer Interface}{7}{lstlisting.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.3}Loadbalancer Round Robin}{7}{subsubsection.3.2.3}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}RoundRobin Konstruktor}{7}{lstlisting.5}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}RoundRobin getServer}{8}{lstlisting.6}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}RoundRobin getServer}{8}{lstlisting.7}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.4}Loadbalancer Weighted Round Robin}{8}{subsubsection.3.2.4}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}Weighted Round Robin Lastberechnnug}{9}{lstlisting.8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.5}Serverseite}{10}{subsubsection.3.2.5}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}Server Implementierung}{10}{lstlisting.9}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}Server getWeight}{11}{lstlisting.10}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}Server Simulator}{11}{lstlisting.11}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Clientseite}{12}{subsection.3.3}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {12}Clientseite RMI Connection}{12}{lstlisting.12}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {13}Client Thread}{12}{lstlisting.13}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Allgemeine Beschreibung des Algorithmus}{3}{section.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Erste \IeC {\"U}berlegnungen und Ziele}{3}{subsection.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Definieren des aktuellen Spielmodus}{3}{subsection.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Bewerten der Felder}{4}{subsection.2.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Implementierung des Algorithmus}{4}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Vorbereitung / Voraussetzung}{4}{subsection.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Die Node Klasse}{4}{subsubsection.3.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Die Priority Queue}{4}{subsubsection.3.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Speichern der Map}{5}{subsection.3.2}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Map Speichern}{5}{lstlisting.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Je nach Feld neue Gewichtung setzen}{6}{subsubsection.3.2.1}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Graph fuer A* beurteilen}{6}{lstlisting.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Bewerten der Felder}{6}{subsection.3.3}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}Felder Bewerten}{7}{lstlisting.3}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}M\IeC {\"o}gliche Felder ermitteln}{7}{lstlisting.4}}
 \bibstyle{unsrt}
 \bibdata{references}
 \bibcite{myRepo}{{1}{}{{}}{{}}}
-\bibcite{wiki}{{2}{}{{}}{{}}}
-\newlabel{LastPage}{{}{13}{}{page.13}{}}
-\xdef\lastpage@lastpage{13}
-\xdef\lastpage@lastpageHy{13}
+\newlabel{LastPage}{{}{8}{}{page.8}{}}
+\xdef\lastpage@lastpage{8}
+\xdef\lastpage@lastpageHy{8}
 \providecommand\NAT@force@numbers{}\NAT@force@numbers

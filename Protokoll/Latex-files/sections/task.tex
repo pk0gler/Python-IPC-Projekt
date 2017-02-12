@@ -1,34 +1,53 @@
 %!TEX root=../document.tex
 
 \section{Einführung}
-Diese Übung zeigt die Anwendung bzw. die Umsetzung eines Loadbalancers in Java.
-Es sollen somit 2 verschiedene Loadbalancingverfahren umgesetzt werden.
+Erstelle einen Java- ODER Python-Client, der sich mit dem Server verbindet und selbstständige Entscheidungen trifft!
+
+Dabei soll dieser Client dementsprechend protokolliert und der verwendete bzw. entworfene Algorithmus beschrieben werden.
+
+Zusätzlich soll der Code des Servers analysiert werden und entsprechende Erweiterungen eingebaut werden.
 
 \subsection{Ziele}
-Das Ziel dieser Übung ist einen funktionierenden Loadbalancer in Java umzusetzten.
+Das Ziel der Übung ist, Python und Sockets genauer kennen zu lernen.
+Somit soll die Inter Prozess Kommunikation nahe gebracht werden.
 
-Dieser soll 2 verschiedene Loadbalancing Methoden implementieren.
-
-Die Kommunikation zwischen Client und Server wird mithilfe von RMI umgesetzt.
-Es soll möglich sein eine gewisse Anzahl von Clients und entsprechenden Server zu simulieren.
+Zusätzlich dient die Übung als EInblick bzw. Einstieg in das Programmieren einer einfachen KI welche selbst ständig agieren soll
 \subsection{Voraussetzungen}
 \begin{itemize}
-	\item Grundlagen Java
-	\item Grundlagen in Loadbalancing
-	\item Grundlagen mit Remote Method Invocation (RMI)
+	\item Grundlagen Python
+	\item Grundlagen IPC
+	\item Grundlagen Pathfinding
 \end{itemize}
 
 \subsection{Aufgabenstellung}
-Es soll ein Load Balancer mit mindestens 2 unterschiedlichen Load-Balancing Methoden (jeweils 7 Punkte) implementiert werden (ähnlich dem PI Beispiel [1]; Lösung zum Teil veraltet [2]). Eine Kombination von mehreren Methoden ist möglich. Die Berechnung/Service und die Kommunikationstechnologie (Java RMI, CORBA, HTTP, Sockets, ...) sind frei wählbar!
+Es soll ein Client, welcher selbsständig Befehle an den Server schickt entworfen werden. Dabei soll darauf geachtet werden, dass dieser den Fallen bzw. den Lakes ausweicht.
 
-Folgende Load Balancing Methoden stehen zur Auswahl:
+DIeser Algorithmus ist entsprechend zu dokumentieren.
 
+Zusätzlich sollen entsprechende Erweiterungen am Server durchgeführt werden.
 \begin{itemize}
-	\item Round Robin
-	\item Weighted Round Robin
-	\item Least Connection
-	\item Agent Based / Server Probes
+	\item Einstellen der Feldgroesse des Servers
+	\item Einstellen der Felder (Mountain, Forest,Lakes)
 \end{itemize}
 
-Um die Komplexität zu steigern, soll zusätzlich eine "Session Persistence" (2 Punkte) implementiert werden.
+\clearpage
+
+Bei der Umsetzung des Clients sind folgende Punkte zu beachten.
+
+\begin{itemize}
+	\item Der Client schickt anschließend basierend auf den Antworten des Servers selbstständig (ohne Benutzereingaben) Move-Befehle:
+	\begin{itemize}
+		\item "UP": Nach oben bewegen
+		\item "RIGHT": Nach rechts bewegen
+		\item "DOWN": Nach unten bewegen
+		\item "LEFT": Nach links bewegen
+	\end{itemize}
+	\item Der Client lässt die Spielfigur NICHT ins Wasser fallen
+	\item Der Client bewegt sich zur Schriftrolle, wenn er sie sieht
+	\item Der Client bewegt sich zur gegnerischen Burg, nachdem er die Schriftrolle eingesammelt hat
+	\item Ansonsten erkundet der Client die Landschaft - auf der Suche nach Schriftrolle bzw. Burg
+	\item Alle Verbindungen werden sauber geschlossen
+	\item JavaDoc/DocString-Kommentare sowie Dokumentation (Sphinx/JavaDoc) sind vorhanden
+\end{itemize}
+
 \clearpage
